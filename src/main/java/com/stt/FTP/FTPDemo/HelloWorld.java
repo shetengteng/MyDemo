@@ -1,4 +1,4 @@
-package com.stt.FTPDemo;
+package com.stt.FTP.FTPDemo;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

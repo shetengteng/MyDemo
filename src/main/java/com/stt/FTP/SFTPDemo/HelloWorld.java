@@ -1,4 +1,4 @@
-package com.stt.SFTPDemo;
+package com.stt.FTP.SFTPDemo;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

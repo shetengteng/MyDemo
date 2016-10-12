@@ -1,4 +1,4 @@
-package com.stt.SFTPDemo;
+package com.stt.FTP.SFTPDemo;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -16,8 +16,8 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
-import com.stt.SFTPDemo.FTPUtilFactory.FTPUtil;
-import com.stt.SFTPDemo.FTPUtilFactory.PretreatmentHandler;
+import com.stt.FTP.SFTPDemo.FTPUtilFactory.FTPUtil;
+import com.stt.FTP.SFTPDemo.FTPUtilFactory.PretreatmentHandler;
 
 public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 

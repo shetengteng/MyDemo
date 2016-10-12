@@ -1,4 +1,4 @@
-package com.stt.SFTPDemo;
+package com.stt.FTP.SFTPDemo;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -16,8 +16,8 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.io.Util;
 
-import com.stt.SFTPDemo.FTPUtilFactory.FTPUtil;
-import com.stt.SFTPDemo.FTPUtilFactory.PretreatmentHandler;
+import com.stt.FTP.SFTPDemo.FTPUtilFactory.FTPUtil;
+import com.stt.FTP.SFTPDemo.FTPUtilFactory.PretreatmentHandler;
 
 public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 
