@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo01.part06.test01;
+package com.stt.NetWorkDemo01.part06_URL.test01;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

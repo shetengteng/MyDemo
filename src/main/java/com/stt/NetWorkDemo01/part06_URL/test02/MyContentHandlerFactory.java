@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo01.part06.test02;
+package com.stt.NetWorkDemo01.part06_URL.test02;
 
 import java.net.ContentHandler;
 import java.net.ContentHandlerFactory;
