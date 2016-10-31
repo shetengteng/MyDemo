@@ -94,7 +94,6 @@ public class HelloWorld {
 		 * 另一种写法 : Arrays.sort(players, (String o1, String o2) ->
 		 * o1.compareTo(o2));
 		 */
-
 		Arrays.asList(players).forEach((p) -> System.out.println(p));
 	}
 
