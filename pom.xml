@@ -2,14 +2,14 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-
   <groupId>com.stt.ssm</groupId>
   <artifactId>MyDemo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
 
   <name>MyDemo</name>
   <url>http://maven.apache.org</url>
+  <description>https://github.com/shetengteng/MyDemo.git</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +20,10 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.9</version>
-      <scope>test</scope>
+      <!-- 
+      	由于在main/java文件夹下中使用了junit，因此，如果是test，则会编译不存在，使用默认
+      	<scope>test</scope>
+       -->
     </dependency>
     
     
@@ -65,10 +68,25 @@
 	    <artifactId>httpclient</artifactId>
 	    <version>4.5.2</version>
 	</dependency>
- 
- 
- 
     
   </dependencies>
-  <description>https://github.com/shetengteng/MyDemo.git</description>
+
+<!-- 
+ 执行mvn 报错 source-1.5 中不支持 diamond运算符
+指定Maven的版本，并且指定Maven使用的jdk版本
+ -->
+     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+  
 </project>
