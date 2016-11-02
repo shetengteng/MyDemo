@@ -4,11 +4,11 @@
 
 
   <groupId>com.stt.ssm</groupId>
-  <artifactId>FTPDemo</artifactId>
+  <artifactId>MyDemo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>FTPDemo</name>
+  <name>MyDemo</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -23,11 +23,20 @@
       <scope>test</scope>
     </dependency>
     
+    
     <dependency>
     	<groupId>commons-net</groupId>
     	<artifactId>commons-net</artifactId>
     	<version>3.5</version>
 	</dependency>
+    
+    <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+	<dependency>
+	    <groupId>commons-codec</groupId>
+	    <artifactId>commons-codec</artifactId>
+	    <version>1.10</version>
+	</dependency>
+    
     
     <!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
 	<dependency>
@@ -56,6 +65,8 @@
 	    <artifactId>httpclient</artifactId>
 	    <version>4.5.2</version>
 	</dependency>
+ 
+ 
  
     
   </dependencies>
