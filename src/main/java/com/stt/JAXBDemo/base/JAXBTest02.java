@@ -1,4 +1,4 @@
-package com.stt.JAXBDemo;
+package com.stt.JAXBDemo.base;
 
 import java.util.ArrayList;
 import java.util.HashSet;

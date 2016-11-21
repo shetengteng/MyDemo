@@ -1,4 +1,4 @@
-package com.stt.JAXBDemo;
+package com.stt.JAXBDemo.base;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -6,11 +6,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType
-public class City {
+@XmlType(propOrder = { "name", "desc" })
+public class Role {
 
-	@XmlElement(name = "CITY_NAME")
+	@XmlElement
 	private String name;
+
+	@XmlElement
+	private String desc;
 
 	public String getName() {
 		return name;
@@ -20,9 +23,17 @@ public class City {
 		this.name = name;
 	}
 
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 	@Override
 	public String toString() {
-		return "City [name=" + name + "]";
+		return "Role [name=" + name + ", desc=" + desc + "]";
 	}
 
 }
