@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.Proxy.Type;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -24,8 +25,7 @@ import javax.net.ssl.X509TrustManager;
 
 /**
  * HTTPS通讯范例: 查询交易明细
- * 
- * @author 徐蓓
+ *
  */
 public class HttpsRequest {
 	private static class TrustAnyTrustManager implements X509TrustManager {
@@ -82,6 +82,11 @@ public class HttpsRequest {
 			url = new URL("https://localhost:443");
 
 			HttpsURLConnection conn;
+			Type type = Type.HTTP;
+
+			// SocketAddress sa = new InetSocketAddress(hostname, port);
+			// Proxy proxy = new Proxy(type, sa);
+			// conn = (HttpsURLConnection) url.openConnection(proxy);
 			conn = (HttpsURLConnection) url.openConnection();
 			conn.setSSLSocketFactory(sc.getSocketFactory());
 			conn.setHostnameVerifier(new TrustAnyHostnameVerifier());
