@@ -22,8 +22,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class HttpUtilFactory {
-	private static final HttpUtilFactory httpUtilFactory = new HttpUtilFactory();
-
 	private HttpUtilFactory() {
 	}
 
@@ -156,9 +154,7 @@ public class HttpUtilFactory {
 
 	}
 
-	public static class HttpUtilImpl implements HttpUtil
-
-	{
+	public static class HttpUtilImpl implements HttpUtil {
 		private HttpURLConnection conn;
 
 		public HttpUtilImpl(HttpURLConnection conn) {
