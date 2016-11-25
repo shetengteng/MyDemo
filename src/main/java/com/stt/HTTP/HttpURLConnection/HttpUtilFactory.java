@@ -56,6 +56,10 @@ public class HttpUtilFactory {
 		return getHttpClient(url, 5000, proxy);
 	}
 
+	public static HttpUtil getHttpClient(String url, int timeout) throws Exception {
+		return getHttpClient(url, timeout, null);
+	}
+
 	public static HttpUtil getHttpClient(String url) throws Exception {
 		return getHttpClient(url, 5000, null);
 	}
