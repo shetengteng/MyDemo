@@ -26,7 +26,12 @@
        -->
     </dependency>
     
-    
+    <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+	<dependency>
+	    <groupId>commons-lang</groupId>
+	    <artifactId>commons-lang</artifactId>
+	    <version>2.6</version>
+	</dependency>
     <dependency>
     	<groupId>commons-net</groupId>
     	<artifactId>commons-net</artifactId>
@@ -87,6 +92,15 @@
         <artifactId>mongodb-driver</artifactId>
         <version>3.3.0</version>
     </dependency> -->
+    
+    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>3.14</version>
+	</dependency>
+    
+    
   </dependencies>
 
 <!-- 

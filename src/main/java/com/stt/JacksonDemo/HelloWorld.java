@@ -13,6 +13,20 @@ public class HelloWorld {
 
 	// jackson 与 Map 互转
 
+	public static void main(String[] args) {
+		HelloWorld helloWorld = new HelloWorld();
+		// sun.misc.Launcher$AppClassLoader@73d16e93
+		System.out.println(helloWorld.getClass().getClassLoader());
+
+		// sun.misc.Launcher$ExtClassLoader@74a14482
+		System.out.println(helloWorld.getClass().getClassLoader().getParent());
+
+		// null
+		Map<String, String> map = new HashMap<String, String>();
+		System.out.println(map.getClass().getClassLoader());
+
+	}
+
 	@Test
 	public void test01() {
 

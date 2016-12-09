@@ -14,8 +14,6 @@ import java.net.URL;
  * @author tengteng.she
  */
 public class HelloWorld {
-	private HelloWorld() {
-	}
 
 	public static enum Method {
 		POST, GET
@@ -68,4 +66,12 @@ public class HelloWorld {
 			}
 		}
 	}
+
+	public static void main(String[] args) {
+
+		HelloWorld helloWorld = new HelloWorld();
+		// sun.misc.Launcher$AppClassLoader@73d16e93
+		System.out.println(helloWorld.getClass().getClassLoader());
+	}
+
 }

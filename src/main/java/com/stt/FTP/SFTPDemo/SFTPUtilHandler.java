@@ -31,7 +31,8 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 
 	private static final ThreadLocal<ChannelSftp> threadLocal = new ThreadLocal<>();
 
-	public SFTPUtilHandler() {}
+	public SFTPUtilHandler() {
+	}
 
 	public SFTPUtilHandler(String hostname, int port, String username, String password) {
 		this.hostname = hostname;
@@ -174,7 +175,8 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 	}
 
 	@Override
-	public boolean download(String localPath, String localFileName, String remotePath, String remoteFileName) throws Exception {
+	public boolean download(String localPath, String localFileName, String remotePath, String remoteFileName)
+			throws Exception {
 		localPath = addFileSeparator(localPath);
 		remotePath = addFileSeparator(remotePath);
 		return download(new File(localPath + localFileName), new File(remotePath + remoteFileName));
@@ -254,7 +256,8 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 	}
 
 	@Override
-	public boolean upload(String localPath, String localFileName, String remotePath, String remoteFileName) throws Exception {
+	public boolean upload(String localPath, String localFileName, String remotePath, String remoteFileName)
+			throws Exception {
 		localPath = addFileSeparator(localPath);
 		remotePath = addFileSeparator(remotePath);
 		return upload(new File(localPath + localFileName), new File(remotePath + remoteFileName));

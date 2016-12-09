@@ -44,7 +44,9 @@ public class HelloWorld {
 					}
 				});
 			}
-			// 哪个有结果就获取哪个结果,结果的顺序不一定与放入的顺序一致
+			// 哪个有结果就获取哪个结果,结果的顺序不一定与放入的顺序一致,与cup的执行顺序有关
+			// CompletionService 与 ExecutorService 的区别是，前者提供了一个无界队列，可以从该队列中获取
+			// 通过遍历获取
 			for (int i = 0; i < 10; i++) {
 				Future<Integer> result = completionService.take();
 				System.out.println(result.get());
