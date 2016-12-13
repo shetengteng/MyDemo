@@ -21,6 +21,11 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * 在某些情况下不适用，需要改进
+ * @author Administrator
+ *
+ */
 public class HttpUtilFactory {
 	private HttpUtilFactory() {
 	}

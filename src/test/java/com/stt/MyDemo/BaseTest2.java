@@ -197,6 +197,7 @@ public class BaseTest2 {
 		// 这种情况下会抛出异常，边界异常
 		// 是个坑，需要注意
 		// 如果只是修改，而非删除操作的话，应该是没有问题的
+
 		int sum = list.size();
 
 		for (int i = 0; i < sum; i++) {
