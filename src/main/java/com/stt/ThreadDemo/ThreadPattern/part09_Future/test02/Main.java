@@ -1,4 +1,4 @@
-package com.stt.ThreadDemo.ThreadPattern.part09.test02;
+package com.stt.ThreadDemo.ThreadPattern.part09_Future.test02;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
