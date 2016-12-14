@@ -5,8 +5,6 @@ import java.math.RoundingMode;
 
 /**
  * 金额工具类
- * @author rui.wang
- * @since 2013年12月5日
  */
 public class AmountUtils {
 

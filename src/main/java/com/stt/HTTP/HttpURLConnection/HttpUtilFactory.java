@@ -13,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -153,11 +154,19 @@ public class HttpUtilFactory {
 
 		public String sendPostData(String data) throws UnsupportedEncodingException;
 
+		public String sendPostData(Map<String, String> params) throws UnsupportedEncodingException;
+
+		public String sendPostData(Map<String, String> params, String charset) throws UnsupportedEncodingException;
+
 		public String sendPostData(String data, String charset) throws UnsupportedEncodingException;
 
 		public byte[] sendGetData(byte[] data);
 
 		public String sendGetData(String data) throws UnsupportedEncodingException;
+
+		public String sendGetData(Map<String, String> params) throws UnsupportedEncodingException;
+
+		public String sendGetData(Map<String, String> params, String charset) throws UnsupportedEncodingException;
 
 		public String sendGetData(String data, String charset) throws UnsupportedEncodingException;
 
@@ -199,6 +208,28 @@ public class HttpUtilFactory {
 		@Override
 		public String sendGetData(String data, String charset) throws UnsupportedEncodingException {
 			byte[] inputData = data.getBytes(charset);
+			return new String(sendGetData(inputData), charset);
+		}
+
+		@Override
+		public String sendPostData(Map<String, String> params) throws UnsupportedEncodingException {
+			return sendPostData(params.toString(), "UTF-8");
+		}
+
+		@Override
+		public String sendPostData(Map<String, String> params, String charset) throws UnsupportedEncodingException {
+			byte[] inputData = params.toString().getBytes(charset);
+			return new String(sendPostData(inputData), charset);
+		}
+
+		@Override
+		public String sendGetData(Map<String, String> params) throws UnsupportedEncodingException {
+			return sendGetData(params.toString(), "UTF-8");
+		}
+
+		@Override
+		public String sendGetData(Map<String, String> params, String charset) throws UnsupportedEncodingException {
+			byte[] inputData = params.toString().getBytes(charset);
 			return new String(sendGetData(inputData), charset);
 		}
 	}
