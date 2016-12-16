@@ -1,4 +1,4 @@
-package com.stt.mongodbDemo.base;
+package com.stt.MongoDB.base;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,13 +11,10 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 
-public class Test05_delete {
+public class Test04_insert {
 
 	MongoClient mongoClient = null;
 	MongoDatabase mongoDatabase = null;
@@ -49,18 +46,21 @@ public class Test05_delete {
 	}
 
 	@Test
-	public void delete() {
+	public void insert() {
 		try {
+			// 获得集合对象,getCollection还可以放入一个Class<T>的参数，可用于返回对象
+			// 注意，即使获取的collection不存在，也不会报错，因为会自动创建一个
 			MongoCollection<Document> collection = mongoDatabase.getCollection("InterfaceRemitBillHistory");
-			// 删除一个
-			collection.deleteOne(Filters.eq("batchCode", "10001"));
-			// 批量删除
-			collection.deleteMany(Filters.eq("batchCode", "10002"));
-			FindIterable<Document> find = collection.find().limit(10).skip(0);
-			MongoCursor<Document> iterator = find.iterator();
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next());
-			}
+
+			// collection 的插入操作，可以使用insertOne,表示插入一个，这使用insertMany
+			Document doc = new Document();
+			doc.append("batchCode", "2015090702");
+			doc.append("billCode", "CMBC4000003");
+			doc.append("requestSeriaNum", "CMBC4000003");
+			doc.append("handlerType", "AUTO");
+			doc.append("cost", 0.2);
+			doc.append("status", "CONFIRM");
+			collection.insertMany(Arrays.asList(doc));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

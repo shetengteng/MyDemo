@@ -1,8 +1,9 @@
-package com.stt.mongodbDemo.base;
+package com.stt.MongoDB.base;
 
 import java.util.Arrays;
 import java.util.List;
 
+import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +11,13 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 
-public class Test02_createCollection {
+public class Test05_delete {
 
 	MongoClient mongoClient = null;
 	MongoDatabase mongoDatabase = null;
@@ -23,7 +28,6 @@ public class Test02_createCollection {
 			// 设定要连接的mongo库的地址
 			ServerAddress serverAddress = new ServerAddress("10.10.111.31", 27017);
 			List<ServerAddress> addresses = Arrays.asList(serverAddress);
-
 			String userName = "admin";
 			String database = "admin";
 			char[] password = "admin".toCharArray();
@@ -45,11 +49,18 @@ public class Test02_createCollection {
 	}
 
 	@Test
-	public void createCollection() {
+	public void delete() {
 		try {
-			// 创建集合
-			mongoDatabase.createCollection("InterfaceRemitBillHistory");
-			System.out.println("create collection successfully");
+			MongoCollection<Document> collection = mongoDatabase.getCollection("InterfaceRemitBillHistory");
+			// 删除一个
+			collection.deleteOne(Filters.eq("batchCode", "10001"));
+			// 批量删除
+			collection.deleteMany(Filters.eq("batchCode", "10002"));
+			FindIterable<Document> find = collection.find().limit(10).skip(0);
+			MongoCursor<Document> iterator = find.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,5 +72,4 @@ public class Test02_createCollection {
 			mongoClient.close();
 		}
 	}
-
 }

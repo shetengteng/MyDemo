@@ -1,9 +1,10 @@
-package com.stt.mongodbDemo.base;
+package com.stt.MongoDB.base;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +16,9 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.UpdateResult;
+import com.mongodb.client.model.Filters;
 
-public class Test06_update {
+public class Test03_find {
 
 	MongoClient mongoClient = null;
 	MongoDatabase mongoDatabase = null;
@@ -49,24 +50,37 @@ public class Test06_update {
 	}
 
 	@Test
-	public void delete() {
-		try {
-			MongoCollection<Document> collection = mongoDatabase.getCollection("InterfaceRemitBillHistory");
+	public void find() {
+		// 获得集合对象,getCollection还可以放入一个Class<T>的参数，可用于返回对象
+		MongoCollection<Document> collection = mongoDatabase.getCollection("FundAccount");
+		// 返回查询的结果集合
+		FindIterable<Document> find = collection.find().limit(10).skip(0);
+		// 返回的结果集合的游标
+		MongoCursor<Document> iterator = find.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+	}
 
-			Document filter = new Document("batchCode", "2015090702");
-			Document update = new Document("$set", new Document("handlerType", "MANUAL"));
-
-			// 2个入参，一个表示查询条件，一个表示替换元素
-			UpdateResult result = collection.updateMany(filter, update);
-			System.out.println("delete count:" + result.getModifiedCount());
-
-			FindIterable<Document> find = collection.find().limit(10).skip(0);
-			MongoCursor<Document> iterator = find.iterator();
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	// 表示bankCode= 'ABC' and status = 'ENABLE' and (accountType = 'MANAGEMENT'
+	// or accountPurpose = 'MANUAL')
+	@Test
+	public void find2() {
+		// 获得集合对象,getCollection还可以放入一个Class<T>的参数，可用于返回对象
+		MongoCollection<Document> collection = mongoDatabase.getCollection("FundAccount");
+		// 设置查询条件
+		Bson eq = Filters.eq("bankCode", "ABC");
+		Document filter = new Document();
+		filter.put("status", "ENABLE");
+		filter.append("$or",
+				Arrays.asList(new Document("accountType", "MANAGEMENT"), new Document("accountPurpose", "MANUAL")));
+		System.out.println(filter);
+		// 返回查询的结果集合
+		FindIterable<Document> find = collection.find(Filters.and(eq, filter)).limit(10).skip(0);
+		// 返回的结果集合的游标
+		MongoCursor<Document> iterator = find.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
 		}
 	}
 

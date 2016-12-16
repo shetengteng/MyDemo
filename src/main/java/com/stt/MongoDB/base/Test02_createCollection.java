@@ -1,9 +1,8 @@
-package com.stt.mongodbDemo.base;
+package com.stt.MongoDB.base;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +10,9 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class Test04_insert {
+public class Test02_createCollection {
 
 	MongoClient mongoClient = null;
 	MongoDatabase mongoDatabase = null;
@@ -25,6 +23,7 @@ public class Test04_insert {
 			// 设定要连接的mongo库的地址
 			ServerAddress serverAddress = new ServerAddress("10.10.111.31", 27017);
 			List<ServerAddress> addresses = Arrays.asList(serverAddress);
+
 			String userName = "admin";
 			String database = "admin";
 			char[] password = "admin".toCharArray();
@@ -46,21 +45,11 @@ public class Test04_insert {
 	}
 
 	@Test
-	public void insert() {
+	public void createCollection() {
 		try {
-			// 获得集合对象,getCollection还可以放入一个Class<T>的参数，可用于返回对象
-			// 注意，即使获取的collection不存在，也不会报错，因为会自动创建一个
-			MongoCollection<Document> collection = mongoDatabase.getCollection("InterfaceRemitBillHistory");
-
-			// collection 的插入操作，可以使用insertOne,表示插入一个，这使用insertMany
-			Document doc = new Document();
-			doc.append("batchCode", "2015090702");
-			doc.append("billCode", "CMBC4000003");
-			doc.append("requestSeriaNum", "CMBC4000003");
-			doc.append("handlerType", "AUTO");
-			doc.append("cost", 0.2);
-			doc.append("status", "CONFIRM");
-			collection.insertMany(Arrays.asList(doc));
+			// 创建集合
+			mongoDatabase.createCollection("InterfaceRemitBillHistory");
+			System.out.println("create collection successfully");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,4 +61,5 @@ public class Test04_insert {
 			mongoClient.close();
 		}
 	}
+
 }

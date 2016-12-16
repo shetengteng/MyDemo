@@ -1,4 +1,4 @@
-package com.stt.mongodbDemo.base;
+package com.stt.MongoDB.base;
 
 import java.util.Arrays;
 import java.util.List;
