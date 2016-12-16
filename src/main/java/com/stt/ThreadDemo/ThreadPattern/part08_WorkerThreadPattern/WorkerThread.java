@@ -1,4 +1,4 @@
-package com.stt.ThreadDemo.ThreadPattern.part08;
+package com.stt.ThreadDemo.ThreadPattern.part08_WorkerThreadPattern;
 
 public class WorkerThread extends Thread{
 

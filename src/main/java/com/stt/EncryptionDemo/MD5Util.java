@@ -18,7 +18,6 @@ public final class MD5Util {
 	 * @param plainText 原串
 	 * @return 摘要串
 	 * @throws Exception
-	 * @see 需要参考的类或方法
 	 */
 	public static String getMD5Encoding(String plainText) {
 		byte[] input = plainText.getBytes();// 声明16进制字母
@@ -40,9 +39,13 @@ public final class MD5Util {
 				hex[2 * i + 1] = hexChar[b & 0xf];// 取每一个字节的高四位换成16进制字母
 			}
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new RuntimeException(e);
 		}
 		return new String(hex);
+	}
+
+	public static byte[] getMD5EncodingBytes(String plainText) {
+		return getMD5Encoding(plainText).getBytes();
 	}
 
 	/**
@@ -51,7 +54,6 @@ public final class MD5Util {
 	 * @param charset 字符集
 	 * @return 摘要串
 	 * @throws Exception
-	 * @see 需要参考的类或方法
 	 */
 	public static String getMD5Encoding(String plainText, String charset) {
 		char[] hex = new char[32];
@@ -78,6 +80,10 @@ public final class MD5Util {
 		return new String(hex);
 	}
 
+	public static byte[] getMD5EncodingBytes(String plainText, String charset) {
+		return getMD5Encoding(plainText, charset).getBytes();
+	}
+
 	/**
 	 * @Description 对文件内容算摘要串信息
 	 * @param file 文件
@@ -93,17 +99,24 @@ public final class MD5Util {
 			MappedByteBuffer byteBuffer = in.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, file.length());
 			MessageDigest md5 = MessageDigest.getInstance("MD5");
 			md5.update(byteBuffer);
+			// 因为这个串很大，因此使用BigInteger，标识为正数
 			BigInteger bi = new BigInteger(1, md5.digest());
+			// 将这个串以16进制输出
 			value = bi.toString(16);
 		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
+			throw new RuntimeException(e);
 		} finally {
 			try {
 				if (null != in)
 					in.close();
 			} catch (IOException e) {
+				throw new RuntimeException(e);
 			}
 		}
 		return value;
+	}
+
+	public static byte[] getMD5EncodingBytes(File file) {
+		return getMD5Encoding(file).getBytes();
 	}
 }

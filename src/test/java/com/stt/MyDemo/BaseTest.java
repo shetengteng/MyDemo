@@ -7,7 +7,6 @@ import java.util.Date;
 public class BaseTest {
 
 	public static void main(String[] args) {
-
 		try {
 			Calendar c = Calendar.getInstance();
 			// 1天前
