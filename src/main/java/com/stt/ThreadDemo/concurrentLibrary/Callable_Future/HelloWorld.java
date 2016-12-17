@@ -1,5 +1,7 @@
-package com.stt.ThreadDemo.concurrentLibrary.CallableAndFuture;
+package com.stt.ThreadDemo.concurrentLibrary.Callable_Future;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
@@ -21,12 +23,16 @@ public class HelloWorld {
 				}
 			};
 			// 获取结果
-			Future<String> result = threadPool.submit(task);
-			System.out.println(result.get());
+			List<Future<String>> list = new ArrayList<>();
+			list.add(threadPool.submit(task));
+			list.add(threadPool.submit(task));
+			for (Future<String> result : list) {
+				System.out.println(result.get());
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("=---------------");
 		try {
 			// 获取一组结果
 			ExecutorService threadPool = Executors.newFixedThreadPool(3);
