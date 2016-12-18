@@ -1,4 +1,4 @@
-package com.stt.ThreadDemo.concurrentLibrary.LockAndCondition.ReadWriteLock;
+package com.stt.ThreadDemo.concurrentLibrary.Lock_Condition.ReadWriteLock;
 
 import java.util.Random;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -28,6 +28,7 @@ public class HelloWorld {
 class Data {
 
 	private Object value = null;
+
 	// 设置读写锁
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 

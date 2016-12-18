@@ -1,4 +1,4 @@
-package com.stt.ThreadDemo.concurrentLibrary.LockAndCondition.Condition;
+package com.stt.ThreadDemo.concurrentLibrary.Lock_Condition.Condition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

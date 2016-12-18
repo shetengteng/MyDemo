@@ -1,4 +1,4 @@
-package com.stt.ThreadDemo.concurrentLibrary.LockAndCondition.ReadWriteLock;
+package com.stt.ThreadDemo.concurrentLibrary.Lock_Condition.ReadWriteLock;
 
 import java.util.HashMap;
 import java.util.Map;

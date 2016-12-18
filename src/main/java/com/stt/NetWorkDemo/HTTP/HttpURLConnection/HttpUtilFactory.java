@@ -1,4 +1,4 @@
-package com.stt.HTTP.HttpURLConnection;
+package com.stt.NetWorkDemo.HTTP.HttpURLConnection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

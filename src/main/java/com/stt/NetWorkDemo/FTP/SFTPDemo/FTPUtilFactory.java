@@ -1,11 +1,11 @@
-package com.stt.FTP.SFTPDemo;
+package com.stt.NetWorkDemo.FTP.SFTPDemo;
 
 import java.io.File;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import com.stt.FTP.SFTPDemo.FTPUtilHandler.ConnectionMode;
+import com.stt.NetWorkDemo.FTP.SFTPDemo.FTPUtilHandler.ConnectionMode;
 
 public class FTPUtilFactory {
 
