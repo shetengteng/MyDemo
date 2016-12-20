@@ -41,7 +41,7 @@ public class HelloWorld {
 			config.put("StrictHostKeyChecking", "no");
 			sshSession.setConfig(config);
 			// 设置超时时间
-			sshSession.setTimeout(3 * 60 * 1000);
+			sshSession.setTimeout(1000);
 			// 建立连接
 			sshSession.connect();
 
@@ -60,9 +60,11 @@ public class HelloWorld {
 			if (sshSession.isConnected()) {
 				sshSession.disconnect();
 			}
-
-			throw new JSchException("Connect to the server failed.Please check HOST[" + hostname + "],PORT[" + port + "],USERNAME[" + username + "],PASSWORD["
-					+ password + "].And check the network connection is working or if the request was denied by the firewall:" + e.getMessage());
+			e.printStackTrace();
+			throw new JSchException("Connect to the server failed.Please check HOST[" + hostname + "],PORT[" + port
+					+ "],USERNAME[" + username + "],PASSWORD[" + password
+					+ "].And check the network connection is working or if the request was denied by the firewall:"
+					+ e.getMessage());
 
 		}
 	}
@@ -73,7 +75,7 @@ public class HelloWorld {
 		String localPath = "D:\\";
 		String localFileName = "ee.ini";
 		// String remotePath = "\\proxy\\ceshi\\stt\\ddd\\";
-		String remotePath = "/proxy/ceshi/stt/ddd";
+		String remotePath = "/test";
 		String remoteFileName = "test_sftp" + System.currentTimeMillis() + ".zip";
 		try {
 			// 切换到工作路径
