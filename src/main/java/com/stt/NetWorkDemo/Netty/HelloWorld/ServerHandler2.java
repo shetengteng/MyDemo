@@ -1,16 +1,26 @@
-package com.stt.NetWorkDemo.Netty.base;
+package com.stt.NetWorkDemo.Netty.HelloWorld;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.ReferenceCountUtil;
 
-public class ServerHandler extends ChannelHandlerAdapter {
+public class ServerHandler2 extends ChannelHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		// 将读取到的数据释放,注意这里的msg是ByteBuf类型，是Netty的类
-		// 这里的功能是将读取到的数据不做任何的处理
-		((ByteBuf) msg).release();
+		try {
+			ByteBuf buf = (ByteBuf) msg;
+			byte[] data = new byte[buf.readableBytes()];
+			// 将数据读取到data中
+			buf.readBytes(data);
+			String request = new String(data, "utf-8");
+			System.out.println(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ReferenceCountUtil.release(msg);
+		}
 	}
 
 	@Override

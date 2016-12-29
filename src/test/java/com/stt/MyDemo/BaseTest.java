@@ -32,4 +32,26 @@ public class BaseTest {
 
 	}
 
+	public static class MyBean {
+		private String name;
+
+		public MyBean() {
+
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+	}
+
+	public MyBean getBean() {
+		MyBean bean = new MyBean();
+		bean.setName("stt");
+		return bean;
+	}
+
 }

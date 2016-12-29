@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Callable;
@@ -30,6 +31,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import com.stt.MyDemo.BaseTest.MyBean;
 
 public class BaseTest2 {
 
@@ -219,6 +221,47 @@ public class BaseTest2 {
 		in.close();
 		System.out.println("---end--");
 		client.close();
+	}
+
+	@Test
+	public void test09() {
+		MyBean bean = new BaseTest().getBean();
+		System.out.println(bean.getName());
+	}
+
+	// 测试值传递
+	@Test
+	public void test10() {
+		List<String> list = new ArrayList<>();
+		getList(list);
+		System.out.println(list);
+		for (String item : list) {
+			System.out.println(item);
+		}
+	}
+
+	public void getList(List<String> list) {
+		ArrayList<String> list2 = new ArrayList<>();
+		list2.add("stt");
+		list.addAll(list2);
+		System.out.println(list);
+		System.out.println(list2);
+	}
+
+	@Test
+	public void test11() {
+
+		Object s = new String("77.8");
+		Object d = 87.6d;
+		System.out.println(Double.valueOf(88.8d));
+		System.out.println(Double.valueOf("886.6"));
+		System.out.println(Double.valueOf(s.toString()));
+		System.out.println(Double.valueOf(d.toString()));
+	}
+
+	@Test
+	public void test12() {
+		System.out.println(new Date().toLocaleString());
 	}
 
 }
