@@ -94,8 +94,7 @@
 	    <artifactId>zookeeper</artifactId>
 	    <version>3.4.6</version>
 	</dependency>
- 
- 
+
 	 <dependency>
 	    <groupId>org.mongodb</groupId>
 	    <artifactId>mongo-java-driver</artifactId>
@@ -114,6 +113,13 @@
 	    <version>3.14</version>
 	</dependency>
     
+    <!-- 获取本地服务器的状态信息 -->
+	<!-- https://mvnrepository.com/artifact/org.fusesource/sigar -->
+	<dependency>
+	    <groupId>org.fusesource</groupId>
+	    <artifactId>sigar</artifactId>
+	    <version>1.6.4</version>
+	</dependency>    
     
   </dependencies>
 

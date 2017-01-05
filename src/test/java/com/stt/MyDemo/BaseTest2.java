@@ -31,7 +31,6 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import com.stt.MyDemo.BaseTest.MyBean;
 
 public class BaseTest2 {
 
@@ -135,7 +134,8 @@ public class BaseTest2 {
 		Socket client = new Socket("10.10.116.45", 6076);
 		InputStream in = client.getInputStream();
 		BufferedInputStream bis = new BufferedInputStream(in);
-		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("F:\\lefu8\\work.jar"));
+		BufferedOutputStream bos = new BufferedOutputStream(
+				new FileOutputStream("d:\\payinterface-remit-ceb-310001.rar"));
 
 		byte[] buf = new byte[8912 * 10];
 		int len = 0;
@@ -208,8 +208,8 @@ public class BaseTest2 {
 
 	@Test
 	public void test08() throws Exception {
-		Socket client = new Socket("10.10.116.45", 6076);
-		InputStream in = new FileInputStream("d:\\proxy\\msftpsrvr.exe");
+		Socket client = new Socket("192.168.16.157", 8995);
+		InputStream in = new FileInputStream("d:\\jj.rar");
 		OutputStream out = client.getOutputStream();
 
 		int len = 0;
@@ -221,12 +221,6 @@ public class BaseTest2 {
 		in.close();
 		System.out.println("---end--");
 		client.close();
-	}
-
-	@Test
-	public void test09() {
-		MyBean bean = new BaseTest().getBean();
-		System.out.println(bean.getName());
 	}
 
 	// 测试值传递

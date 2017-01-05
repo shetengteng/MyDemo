@@ -11,7 +11,8 @@ public class FTPUtilFactory {
 
 	private static final FTPUtilFactory fTPUtilFactory = new FTPUtilFactory();
 
-	private FTPUtilFactory() {}
+	private FTPUtilFactory() {
+	}
 
 	/**
 	 * @param hostname
@@ -22,9 +23,21 @@ public class FTPUtilFactory {
 	 * @return
 	 * @throws Exception
 	 */
-	public static FTPUtil getSFTPUtilInstance(String hostname, int port, String username, String password, int timeOut) throws Exception {
+	public static FTPUtil getSFTPUtilInstance(String hostname, int port, String username, String password, int timeOut)
+			throws Exception {
 		try {
 			FTPUtil target = new SFTPUtilHandler(hostname, port, username, password, timeOut);
+			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
+			return (FTPUtil) handler.getProxy();
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+	}
+
+	public static FTPUtil getSFTPUtilInstance(String hostname, int port, String username, String password)
+			throws Exception {
+		try {
+			FTPUtil target = new SFTPUtilHandler(hostname, port, username, password);
 			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
 			return (FTPUtil) handler.getProxy();
 		} catch (Exception e) {
@@ -45,10 +58,11 @@ public class FTPUtilFactory {
 	 * @return
 	 * @throws Exception
 	 */
-	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password, ConnectionMode connMode, String character, int bufferSize,
-			int dataTimeOut, int dataPort) throws Exception {
+	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password,
+			ConnectionMode connMode, String character, int bufferSize, int dataTimeOut, int dataPort) throws Exception {
 		try {
-			FTPUtil target = new FTPUtilHandler(hostname, port, username, password, connMode, character, bufferSize, dataTimeOut, dataPort);
+			FTPUtil target = new FTPUtilHandler(hostname, port, username, password, connMode, character, bufferSize,
+					dataTimeOut, dataPort);
 			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
 			return (FTPUtil) handler.getProxy();
 		} catch (Exception e) {
@@ -56,7 +70,8 @@ public class FTPUtilFactory {
 		}
 	}
 
-	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password, ConnectionMode connMode, int dataPort) throws Exception {
+	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password,
+			ConnectionMode connMode, int dataPort) throws Exception {
 		try {
 			FTPUtil target = new FTPUtilHandler(hostname, port, username, password, connMode, dataPort);
 			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
@@ -66,8 +81,8 @@ public class FTPUtilFactory {
 		}
 	}
 
-	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password, ConnectionMode connMode, int dataPort, String character)
-			throws Exception {
+	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password,
+			ConnectionMode connMode, int dataPort, String character) throws Exception {
 		try {
 			FTPUtil target = new FTPUtilHandler(hostname, port, username, password, connMode, character, dataPort);
 			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
@@ -77,10 +92,11 @@ public class FTPUtilFactory {
 		}
 	}
 
-	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password, ConnectionMode connMode, int dataPort, String character,
-			int bufferSize) throws Exception {
+	public static FTPUtil getFTPUtilInstance(String hostname, int port, String username, String password,
+			ConnectionMode connMode, int dataPort, String character, int bufferSize) throws Exception {
 		try {
-			FTPUtil target = new FTPUtilHandler(hostname, port, username, password, connMode, character, bufferSize, dataPort);
+			FTPUtil target = new FTPUtilHandler(hostname, port, username, password, connMode, character, bufferSize,
+					dataPort);
 			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
 			return (FTPUtil) handler.getProxy();
 		} catch (Exception e) {
@@ -164,7 +180,8 @@ public class FTPUtilFactory {
 
 		public boolean download(String localPathAndFileName, String remotePathAndFileName) throws Exception;
 
-		public boolean download(String localPath, String localFileName, String remotePath, String remoteFileName) throws Exception;
+		public boolean download(String localPath, String localFileName, String remotePath, String remoteFileName)
+				throws Exception;
 
 		public byte[] downloadBytes(File remoteFile) throws Exception;
 
@@ -176,7 +193,8 @@ public class FTPUtilFactory {
 
 		public boolean upload(String localPathAndFileName, String remotePathAndFileName) throws Exception;
 
-		public boolean upload(String localPath, String localFileName, String remotePath, String remoteFileName) throws Exception;
+		public boolean upload(String localPath, String localFileName, String remotePath, String remoteFileName)
+				throws Exception;
 
 		public boolean upload(byte[] localByte, File remoteFile) throws Exception;
 
