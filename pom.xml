@@ -121,6 +121,15 @@
 	    <version>1.6.4</version>
 	</dependency>    
     
+    <!-- JBOSS的序列化工具，netty中使用 -->
+    <!-- https://mvnrepository.com/artifact/org.jboss.marshalling/jboss-marshalling-serial -->
+	<dependency>
+	    <groupId>org.jboss.marshalling</groupId>
+	    <artifactId>jboss-marshalling-serial</artifactId>
+	    <version>1.4.11.Final</version>
+	</dependency>
+    
+    
   </dependencies>
 
 <!-- 

@@ -37,6 +37,5 @@ public class Client {
 		// 等待客户端端口关闭
 		cf.channel().closeFuture().sync();
 		group.shutdownGracefully();
-
 	}
 }
