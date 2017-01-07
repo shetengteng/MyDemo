@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.HeartBeat;
+package com.stt.Netty.HeartBeat;
 
 import java.util.HashMap;
 import java.util.Map;

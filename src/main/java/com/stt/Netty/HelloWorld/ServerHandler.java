@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.HelloWorld;
+package com.stt.Netty.HelloWorld;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;

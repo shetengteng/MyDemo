@@ -206,10 +206,11 @@ public class BaseTest2 {
 		}
 	}
 
+	// 发送
 	@Test
 	public void test08() throws Exception {
-		Socket client = new Socket("192.168.16.157", 8995);
-		InputStream in = new FileInputStream("d:\\jj.rar");
+		Socket client = new Socket("10.10.116.45", 6076);
+		InputStream in = new FileInputStream("d:\\ceb310001.zip");
 		OutputStream out = client.getOutputStream();
 
 		int len = 0;
@@ -256,6 +257,13 @@ public class BaseTest2 {
 	@Test
 	public void test12() {
 		System.out.println(new Date().toLocaleString());
+	}
+
+	@Test
+	public void test13() {
+		// 换行符
+		String separator = System.getProperty("line.separator");
+		System.out.println(separator.length());
 	}
 
 }

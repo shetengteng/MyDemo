@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.HeartBeat;
+package com.stt.Netty.HeartBeat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

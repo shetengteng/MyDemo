@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.PacketSplicing;
+package com.stt.Netty.PacketSplicing;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.PacketSplicing;
+package com.stt.Netty.PacketSplicing;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;

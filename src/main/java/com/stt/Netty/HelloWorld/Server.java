@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.HelloWorld;
+package com.stt.Netty.HelloWorld;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -9,7 +9,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class MulitServer {
+public class Server {
+
+	static int port = 8888;
 
 	public static void main(String[] args) {
 		// EventLoopGroup 用于处理IO操作的多线程循环器
@@ -38,13 +40,10 @@ public class MulitServer {
 			// 保持连接
 			bootStrap.childOption(ChannelOption.SO_KEEPALIVE, true);
 
-			// 可以绑定多个端口
-			ChannelFuture future = bootStrap.bind(8888).sync();
-			ChannelFuture future2 = bootStrap.bind(8889).sync();
+			ChannelFuture future = bootStrap.bind(port).sync();
 
 			// 在存储阻塞，等待关闭，类似与ThreadSleep
 			future.channel().closeFuture().sync();
-			future2.channel().closeFuture().sync();
 
 		} catch (Exception e) {
 			e.printStackTrace();

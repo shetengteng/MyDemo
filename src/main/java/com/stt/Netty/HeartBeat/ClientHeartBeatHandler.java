@@ -1,4 +1,4 @@
-package com.stt.NetWorkDemo.Netty.HeartBeat;
+package com.stt.Netty.HeartBeat;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
