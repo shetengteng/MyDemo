@@ -129,6 +129,12 @@
 	    <version>1.4.11.Final</version>
 	</dependency>
     
+    <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
+	<dependency>
+	    <groupId>org.apache.activemq</groupId>
+	    <artifactId>activemq-all</artifactId>
+	    <version>5.11.1</version>
+	</dependency>
     
   </dependencies>
 
