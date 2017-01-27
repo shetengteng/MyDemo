@@ -141,6 +141,7 @@
 <!-- 
  执行mvn 报错 source-1.5 中不支持 diamond运算符
 指定Maven的版本，并且指定Maven使用的jdk版本
+同时解决Override报错问题
  -->
      <build>
         <plugins>
