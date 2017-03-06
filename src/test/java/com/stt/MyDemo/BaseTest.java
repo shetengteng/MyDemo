@@ -8,6 +8,7 @@ public class BaseTest {
 
 	public static void main(String[] args) {
 		try {
+
 			Calendar c = Calendar.getInstance();
 			// 1天前
 			c.add(Calendar.DATE, -1);

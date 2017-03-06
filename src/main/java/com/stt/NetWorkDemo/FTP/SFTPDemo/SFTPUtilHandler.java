@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Vector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
@@ -21,6 +24,8 @@ import com.stt.NetWorkDemo.FTP.SFTPDemo.FTPUtilFactory.PretreatmentHandler;
 
 public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 
+	private static final Logger logger = LoggerFactory.getLogger(SFTPUtilHandler.class);
+
 	/** 默认 FTP 读取数据超时时间设置 */
 	private final static int DEDAULT_TIMEOUT = 3 * 60 * 1000;
 	private String hostname;
@@ -30,6 +35,7 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 	private int timeOut;
 
 	private static final ThreadLocal<ChannelSftp> threadLocal = new ThreadLocal<>();
+	private static final ThreadLocal<Session> threadLocalSession = new ThreadLocal<>();
 
 	public SFTPUtilHandler() {
 	}
@@ -94,15 +100,19 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 			channel.connect();
 			sftpChannel = (ChannelSftp) channel;
 
+			threadLocalSession.remove();
 			threadLocal.remove();
+			threadLocalSession.set(sshSession);
 			threadLocal.set(sftpChannel);
-
 			return true;
 		} catch (JSchException e) {
-			e.printStackTrace();
-			if (sshSession != null && sshSession.isConnected()) {
+			// logger.error("##SFTPUtilHandler connect username:{} hostname:{}
+			// password:{} port:{} ERROR:{}", username,
+			// hostname, password, port, e);
+			if (sshSession != null)
 				sshSession.disconnect();
-			}
+			if (sftpChannel != null)
+				sftpChannel.disconnect();
 			return false;
 		}
 	}
@@ -112,14 +122,24 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 		return ftpClient;
 	}
 
+	private Session getSession() {
+		Session sshSession = threadLocalSession.get();
+		return sshSession;
+	}
+
 	/**
 	 * 关闭通道
 	 */
 	public void disconnect() {
 		ChannelSftp sftpChannel = getSFTPChannel();
-		if (null != sftpChannel && sftpChannel.isConnected()) {
-			sftpChannel.exit();
+		if (null != sftpChannel) {
+			sftpChannel.disconnect();
 			threadLocal.remove();
+		}
+		Session session = getSession();
+		if (null != session) {
+			session.disconnect();
+			threadLocalSession.remove();
 		}
 	}
 
@@ -184,10 +204,8 @@ public class SFTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 
 	@Override
 	public byte[] downloadBytes(File remoteFile) throws Exception {
-		// TODO Auto-generated method stub
 		ByteArrayOutputStream out = null;
 		try {
-
 			// 判断远程文件是否存在,切换工作路径，如果不存在，则报错
 			// 注意是文件分割符号是/ ,不论是windows还是Linux下
 			getSFTPChannel().cd(checkPath(remoteFile.getParent()));

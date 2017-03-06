@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -210,7 +211,7 @@ public class BaseTest2 {
 	@Test
 	public void test08() throws Exception {
 		Socket client = new Socket("10.10.116.45", 6076);
-		InputStream in = new FileInputStream("d:\\ceb310001.zip");
+		InputStream in = new FileInputStream("d:\\13.zip");
 		OutputStream out = client.getOutputStream();
 
 		int len = 0;
@@ -264,6 +265,13 @@ public class BaseTest2 {
 		// 换行符
 		String separator = System.getProperty("line.separator");
 		System.out.println(separator.length());
+	}
+
+	@Test
+	public void test14() {
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, -2);
+		System.out.println(c.getTime());
 	}
 
 }

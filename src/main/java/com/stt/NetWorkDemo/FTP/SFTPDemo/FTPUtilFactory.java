@@ -7,8 +7,13 @@ import java.lang.reflect.Proxy;
 
 import com.stt.NetWorkDemo.FTP.SFTPDemo.FTPUtilHandler.ConnectionMode;
 
+/**
+ * @Description: 这里用一句话描述这个类的作用
+ * @see: FTPUtilFactory 此处填写需要参考的类
+ * @version 2016年12月2日 下午6:43:49
+ * @author tengteng.she
+ */
 public class FTPUtilFactory {
-
 	private static final FTPUtilFactory fTPUtilFactory = new FTPUtilFactory();
 
 	private FTPUtilFactory() {
@@ -27,17 +32,6 @@ public class FTPUtilFactory {
 			throws Exception {
 		try {
 			FTPUtil target = new SFTPUtilHandler(hostname, port, username, password, timeOut);
-			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
-			return (FTPUtil) handler.getProxy();
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-
-	public static FTPUtil getSFTPUtilInstance(String hostname, int port, String username, String password)
-			throws Exception {
-		try {
-			FTPUtil target = new SFTPUtilHandler(hostname, port, username, password);
 			FTPInvocationHandler handler = fTPUtilFactory.new FTPInvocationHandler(target);
 			return (FTPUtil) handler.getProxy();
 		} catch (Exception e) {
