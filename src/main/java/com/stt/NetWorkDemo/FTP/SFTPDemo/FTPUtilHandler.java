@@ -15,12 +15,14 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.io.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.stt.NetWorkDemo.FTP.SFTPDemo.FTPUtilFactory.FTPUtil;
 import com.stt.NetWorkDemo.FTP.SFTPDemo.FTPUtilFactory.PretreatmentHandler;
 
 public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
-
+	private static final Logger logger = LoggerFactory.getLogger(FTPUtilHandler.class);
 	/** 默认缓冲区大小 ,设置8K则会有问题 */
 	private final static int DEFAULT_BUF_KB8 = 1024 * 8;
 	/** 默认 FTP 读取数据超时时间设置 */
@@ -45,10 +47,11 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 
 	private static final ThreadLocal<FTPClient> threadLocal = new ThreadLocal<>();
 
-	public FTPUtilHandler() {}
+	public FTPUtilHandler() {
+	}
 
-	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode, String character, int bufferSize, int dataTimeOut,
-			int dataPort) {
+	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode,
+			String character, int bufferSize, int dataTimeOut, int dataPort) {
 		this.hostname = hostname;
 		this.port = port;
 		this.username = username;
@@ -60,7 +63,8 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 		this.dataPort = dataPort;
 	}
 
-	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode, String character, int dataPort) {
+	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode,
+			String character, int dataPort) {
 		this.hostname = hostname;
 		this.port = port;
 		this.username = username;
@@ -72,7 +76,8 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 		this.dataPort = dataPort;
 	}
 
-	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode, String character, int bufferSize, int dataPort) {
+	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode,
+			String character, int bufferSize, int dataPort) {
 		this.hostname = hostname;
 		this.port = port;
 		this.username = username;
@@ -84,7 +89,8 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 		this.dataPort = dataPort;
 	}
 
-	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode, int dataPort) {
+	public FTPUtilHandler(String hostname, int port, String username, String password, ConnectionMode connMode,
+			int dataPort) {
 		this.hostname = hostname;
 		this.port = port;
 		this.username = username;
@@ -113,8 +119,8 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 	 * 建立链接
 	 */
 	@SuppressWarnings("unused")
-	private boolean connect(String hostname, int port, String username, String password, ConnectionMode connMode, String character, int bufferSize, int dataTimeOut,
-			int dataPort) {
+	private boolean connect(String hostname, int port, String username, String password, ConnectionMode connMode,
+			String character, int bufferSize, int dataTimeOut, int dataPort) {
 		this.hostname = hostname;
 		this.port = port;
 		this.username = username;
@@ -132,6 +138,7 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 		FTPClient ftpClient = getFTPClient();
 		try {
 			ftpClient.setDataTimeout(dataTimeOut);// 设置超时时间，单位ms
+			ftpClient.setConnectTimeout(dataTimeOut);
 			ftpClient.setControlEncoding(character);// 设置编码字符集
 			switch (connMode) {// 设置被动模式:有本地的主动和远端的主动模式
 			case ACTIVE_LOCAL:
@@ -155,10 +162,14 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 			}
 			// 进行链接操作
 			ftpClient.connect(hostname, port);
+
 			// 连接的返回码是220:对新用户服务准备好  
 			int replyCode = ftpClient.getReplyCode();
 			// 获取返回值在200与300 之间返回true,同时进行登录操作
 			if (FTPReply.isPositiveCompletion(replyCode) && ftpClient.login(username, password)) {
+				// 设置为二进制传输，防止文件以文本传输，格式改变
+				// 注意：要在登陆之后设置
+				ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
 				return true;
 			} else {
 				throw new RuntimeException("验证不通过:用户名或者密码错误");
@@ -175,13 +186,20 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 			if (ftpClient != null && ftpClient.isConnected()) {
 				// 注销
 				ftpClient.logout();
-				// 关闭链接
-				ftpClient.disconnect();
 			}
-			ftpClient = null;
-			threadLocal.remove();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if (ftpClient != null && ftpClient.isConnected()) {
+				// 关闭链接
+				try {
+					ftpClient.disconnect();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				ftpClient = null;
+				threadLocal.remove();
+			}
 		}
 	}
 
@@ -224,7 +242,8 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 	}
 
 	@Override
-	public boolean download(String localPath, String localFileName, String remotePath, String remoteFileName) throws IOException {
+	public boolean download(String localPath, String localFileName, String remotePath, String remoteFileName)
+			throws IOException {
 		localPath = addFileSeparator(localPath);
 		remotePath = addFileSeparator(remotePath);
 		return download(new File(localPath + localFileName), new File(remotePath + remoteFileName));
@@ -340,7 +359,8 @@ public class FTPUtilHandler extends PretreatmentHandler implements FTPUtil {
 	}
 
 	@Override
-	public boolean upload(String localPath, String localFileName, String remotePath, String remoteFileName) throws Exception {
+	public boolean upload(String localPath, String localFileName, String remotePath, String remoteFileName)
+			throws Exception {
 		localPath = addFileSeparator(localPath);
 		remotePath = addFileSeparator(remotePath);
 		return upload(new File(localPath + localFileName), new File(remotePath + remoteFileName));

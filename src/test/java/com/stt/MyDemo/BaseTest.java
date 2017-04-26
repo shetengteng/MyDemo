@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.junit.Test;
+
 public class BaseTest {
 
 	public static void main(String[] args) {
@@ -53,6 +55,11 @@ public class BaseTest {
 		MyBean bean = new MyBean();
 		bean.setName("stt");
 		return bean;
+	}
+
+	@Test
+	public void test01() {
+
 	}
 
 }
