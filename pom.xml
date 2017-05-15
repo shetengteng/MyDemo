@@ -142,6 +142,25 @@
 		<version>2.9.0</version>
 	</dependency>
     
+     <!-- 添加servlet支持 -->
+		 <dependency>
+		   <groupId>javax.servlet</groupId>
+		   <artifactId>javax.servlet-api</artifactId>
+		   <version>3.1.0</version>
+		 </dependency>
+		 <!-- 添加jsp支持 -->
+		 <dependency>
+		   <groupId>javax.servlet.jsp</groupId>
+		   <artifactId>javax.servlet.jsp-api</artifactId>
+		   <version>2.3.1</version>
+		 </dependency>
+		 <!-- 添加jtl支持 -->
+		 <dependency>
+		   <groupId>javax.servlet</groupId>
+		   <artifactId>jstl</artifactId>
+		   <version>1.2</version>
+		 </dependency>
+    
   </dependencies>
 
 <!-- 
